@@ -4,6 +4,7 @@ import UseCases from '@/components/home/UseCases';
 import Feature from '@/components/home/Feature';
 import About from '@/components/home/About';
 import DeploymentTimeline from '@/components/home/DeploymentTimeline';
+import ContactInfo from '@/components/home/ContactInfo';
 import { defaultMetadata } from '@/utils/generateMetaData';
 import { Metadata } from 'next';
 
@@ -23,6 +24,7 @@ const page = () => {
       <Feature />
       <About />
       <DeploymentTimeline />
+      <ContactInfo />
     </main>
   );
 };
