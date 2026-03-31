@@ -1,6 +1,6 @@
 import RevealAnimation from '@/components/animation/RevealAnimation';
 import { cn } from '@/utils/cn';
-import gradient2 from '@public/images/ns-img-494.png';
+import gradient1 from '@public/images/ns-img-493.png';
 import Image from 'next/image';
 
 interface FooterLeftGradientProps {
@@ -15,7 +15,7 @@ const FooterLeftGradient = ({ className }: FooterLeftGradientProps) => {
           'pointer-events-none absolute bottom-[-33%] left-[-83%] size-[728px] select-none min-[2559px]:!left-[-16%] md:bottom-[-60%] md:left-[-52%] md:size-[870px] lg:left-[-38%] xl:bottom-[-77%] xl:left-[-30%] 2xl:left-[-22%]',
           className,
         )}>
-        <Image className="size-full object-bottom" src={gradient2} alt="Decorative gradient background" />
+        <Image className="size-full object-bottom" src={gradient1} alt="Decorative gradient background" />
       </figure>
     </RevealAnimation>
   );
