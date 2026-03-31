@@ -1,19 +1,26 @@
+'use client';
+
 import RevealAnimation from '@/components/animation/RevealAnimation';
 import { FooterOneData } from '@/interface';
-import behance from '@public/images/icons/behance.svg';
-import dribbble from '@public/images/icons/dribbble.svg';
 import facebook from '@public/images/icons/facebook.svg';
 import instagram from '@public/images/icons/instagram.svg';
 import linkedin from '@public/images/icons/linkedin.svg';
 import youtube from '@public/images/icons/youtube.svg';
-import darkLogo from '@public/images/shared/dark-logo.svg';
+import darkLogo from '@public/images/shared/logo-dark.svg';
+// import mainLogo from '@public/images/shared/main-logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { footerData } from '../navbar/data';
-import ThemeToggle from '../ThemeToggle';
+// import ThemeToggle from '../ThemeToggle';
 import FooterDivider from './FooterDivider';
 import FooterLeftGradient from './FooterLeftGradient';
 import FooterRightGradient from './FooterRightGradient';
+
+const legalLinks = [
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Terms of Service', href: '/terms-conditions' },
+  { label: 'Security', href: '/security' },
+];
 
 const Footer = () => {
   return (
@@ -32,7 +39,7 @@ const Footer = () => {
                   <Image src={darkLogo} alt="NextSass Logo" />
                 </figure>
                 <p className="text-accent/60 text-tagline-1 mt-4 mb-7 font-normal">
-                  Powerful crypto marketing tools to grow your Web3 project.
+                  Smart Safety for Every Worker. Real-time visibility and AI-powered insights to protect your workforce.
                 </p>
                 <div className="flex items-center gap-3">
                   <Link target="_blank" href="https://www.facebook.com" className="footer-social-link">
@@ -53,16 +60,6 @@ const Footer = () => {
                   <Link target="_blank" href="https://www.linkedin.com" className="footer-social-link">
                     <span className="sr-only">LinkedIn</span>
                     <Image className="size-6" src={linkedin} alt="LinkedIn" />
-                  </Link>
-                  <div className="bg-stroke-1/20 h-6 w-px"></div>
-                  <Link target="_blank" href="https://www.dribbble.com" className="footer-social-link">
-                    <span className="sr-only">Dribbble</span>
-                    <Image className="size-6" src={dribbble} alt="Dribbble" />
-                  </Link>
-                  <div className="bg-stroke-1/20 h-6 w-px"></div>
-                  <Link target="_blank" href="https://www.behance.net" className="footer-social-link">
-                    <span className="sr-only">Behance</span>
-                    <Image className="size-6" src={behance} alt="Behance" />
                   </Link>
                 </div>
               </div>
@@ -91,14 +88,33 @@ const Footer = () => {
         </div>
         <div className="relative pt-[26px] pb-[100px] text-center">
           <FooterDivider />
-          <RevealAnimation delay={0.7} offset={10} start="top 105%">
-            <p className="text-tagline-1 text-primary-50 font-normal">
-              Copyright &copy;NextSaaS – smart application for modern business
-            </p>
+          <RevealAnimation delay={0.7} offset={10} start="top 95%">
+            <div className="flex flex-col items-start gap-4 pt-1 sm:flex-row sm:items-center sm:justify-between">
+              {/* copyright */}
+              <p className="text-tagline-2 text-primary-50/70 font-normal">
+                &copy;2026 Innova Solutions. All Rights Reserved.
+              </p>
+
+              {/* legal links */}
+              <nav aria-label="Legal links">
+                <ul className="flex items-center gap-6 sm:gap-8">
+                  {legalLinks.map((link) => (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        className="text-tagline-2 text-primary-50/70 hover:text-primary-50 font-normal transition-colors duration-200"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
           </RevealAnimation>
         </div>
       </div>
-      <ThemeToggle />
+      {/* <ThemeToggle /> */}
     </footer>
   );
 };

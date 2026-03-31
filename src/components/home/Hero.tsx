@@ -1,3 +1,5 @@
+'use client';
+
 import RevealAnimation from '../animation/RevealAnimation';
 import LinkButton from '../ui/button/LinkButton';
 import HeroPerspective from './HeroPerspective';
@@ -43,7 +45,6 @@ const Hero = () => {
               </RevealAnimation>
             </ul>
           </div>
-          {/* video  */}
           <HeroPerspective />
         </div>
       </div>

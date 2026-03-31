@@ -67,16 +67,14 @@ const TimelineMarker = ({ variant }: { variant: (typeof timelineSteps)[0]['marke
   return (
     <div className="relative flex items-center justify-center">
       <span
-        className={`absolute h-7 w-7 rounded-full border ${
-          isOrange ? 'border-orange-400/30 bg-orange-500/10' : 'border-blue-400/30 bg-blue-500/10'
-        }`}
+        className={`absolute h-7 w-7 rounded-full border ${isOrange ? 'border-orange-400/30 bg-orange-500/10' : 'border-blue-400/30 bg-blue-500/10'
+          }`}
       />
       <span
-        className={`relative h-3.5 w-3.5 rounded-full ${
-          isOrange
+        className={`relative h-3.5 w-3.5 rounded-full ${isOrange
             ? 'bg-orange-400 shadow-[0_0_10px_rgba(251,146,60,0.7)]'
             : 'bg-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.7)]'
-        }`}
+          }`}
       />
     </div>
   );
@@ -92,7 +90,7 @@ const DeploymentTimeline = () => {
   useGSAP(
     () => {
       const section = sectionRef.current;
-      if (!section) return;
+      if (!section) { return; }
 
       // ── master timeline, triggered once when section hits 80% of viewport ──
       const tl = gsap.timeline({
@@ -199,7 +197,7 @@ const DeploymentTimeline = () => {
               {timelineSteps.map((step, idx) => (
                 <div
                   key={step.id}
-                  ref={(el) => { if (el) labelsRef.current[idx] = el; }}
+                  ref={(el) => { if (el) { labelsRef.current[idx] = el; } }}
                   className="flex-1 text-center"
                 >
                   <span className="text-accent/70 text-[13px] font-medium">{step.timeLabel}</span>
@@ -222,7 +220,7 @@ const DeploymentTimeline = () => {
               {timelineSteps.map((step, idx) => (
                 <div
                   key={step.id}
-                  ref={(el) => { if (el) markersRef.current[idx] = el; }}
+                  ref={(el) => { if (el) { markersRef.current[idx] = el; } }}
                   className="relative z-10 flex flex-1 justify-center"
                 >
                   <TimelineMarker variant={step.markerVariant} />
@@ -235,7 +233,7 @@ const DeploymentTimeline = () => {
               {timelineSteps.map((step, idx) => (
                 <div
                   key={step.id}
-                  ref={(el) => { if (el) cardsRef.current[idx] = el; }}
+                  ref={(el) => { if (el) { cardsRef.current[idx] = el; } }}
                   className="flex-1 px-3 first:pl-0 last:pr-0"
                 >
                   <div className="space-y-2">

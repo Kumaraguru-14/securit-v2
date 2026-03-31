@@ -13,17 +13,11 @@ import Link from 'next/link';
 import { useState } from 'react';
 import MobileMenu from '../mobile-menu/MobileMenu';
 import MobileMenuButton from '../mobile-menu/MobileMenuButton';
-import CompanyMenu from './CompanyMenu';
-import PlanAndSupportMenu from './PlanAndSupportMenu';
-import PlatformMenu from './PlatformMenu';
 import ResourcesMenu from './ResourcesMenu';
 import { mobileMenuData } from './data';
 
 const dropdownNavItems = [
-  // { label: 'Company', dataMenu: 'company-mega-menu', MenuComponent: CompanyMenu },
-  // { label: 'Platform', dataMenu: 'platform-mega-menu', MenuComponent: PlatformMenu },
   { label: 'Resources', dataMenu: 'resources-dropdown-menu', MenuComponent: ResourcesMenu },
-  // { label: 'Plans & Support', dataMenu: 'plan-and-support-mega-menu', MenuComponent: PlanAndSupportMenu },
 ];
 
 const Navbar = () => {
