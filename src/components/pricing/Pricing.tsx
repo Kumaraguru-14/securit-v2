@@ -1,276 +1,179 @@
-import gradient4 from '@public/images/ns-img-496.png';
-import Image from 'next/image';
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
+
+import { CheckIcon } from '@/icons';
+import { cn } from '@/utils/cn';
+
 import RevealAnimation from '../animation/RevealAnimation';
+
+type PricingPlan = {
+  id: string;
+  title: string;
+  description: string;
+  monthlyPrice: string;
+  annualPrice: string;
+  descriptionMuted?: boolean;
+  featured?: boolean;
+  features: {
+    label: string;
+    active: boolean;
+  }[];
+};
+
+const pricingPlans: PricingPlan[] = [
+  {
+    id: 'simplified',
+    title: 'Simplified',
+    description: 'For individuals and small teams with unlimited trial access.',
+    monthlyPrice: '19.00',
+    annualPrice: '230.00',
+    features: [
+      { label: 'Single Payment', active: true },
+      { label: 'Selling your own items', active: false },
+      { label: 'Powerful integration', active: false },
+    ],
+  },
+  {
+    id: 'basic',
+    title: 'Basic',
+    description: 'For individuals and small teams with unlimited trial access.',
+    monthlyPrice: '3342.00',
+    annualPrice: '4420.00',
+    featured: true,
+    descriptionMuted: true,
+    features: [
+      { label: 'Unlimited Bandwidth', active: true },
+      { label: 'Promotional Tools', active: true },
+      { label: 'Single Payment', active: true },
+      { label: 'Single Payment', active: true },
+      { label: 'Selling your own items', active: false },
+      { label: 'Powerful integration', active: false },
+    ],
+  },
+  {
+    id: 'enhanced',
+    title: 'Enhanced',
+    description: 'For individuals and small teams with unlimited trial access.',
+    monthlyPrice: '4800.00',
+    annualPrice: '5800.00',
+    descriptionMuted: true,
+    features: [
+      { label: 'Selling on your own conditions', active: true },
+      { label: 'Seamless integrations', active: true },
+      { label: 'Real-time streaming', active: false },
+    ],
+  },
+];
+
 const Pricing = () => {
+  const [isAnnual, setIsAnnual] = useState<boolean>(false);
+
   return (
-    <section className="pt-[120px] pb-16 md:pt-[160px] md:pb-20 lg:pb-[95px] xl:pb-[100px]">
-      <RevealAnimation delay={0.1}>
-        <div className="bg-background-2 dark:bg-background-8 mx-auto w-full max-w-[1440px] space-y-[70px] rounded-2xl px-5 py-[100px] md:px-6 lg:px-10 xl:px-16">
-          <div className="mx-auto max-w-2xl space-y-3 text-center">
-            <RevealAnimation delay={0.2}>
-              <span className="badge badge-cyan">Our pricing</span>
-            </RevealAnimation>
-            <RevealAnimation delay={0.3}>
-              <h2>Select the pricing plan that best suits your needs.</h2>
-            </RevealAnimation>
-          </div>
-          <div className="grid grid-cols-12 gap-8">
-            <div className="col-span-12 md:col-span-6 xl:col-span-3">
-              <RevealAnimation delay={0.4}>
-                <div>
-                  <div className="md:h-[195px] md:w-[290px]" />
-                  <div className="space-y-2.5">
-                    <h3 className="text-heading-6">What’s included</h3>
-                    <ul>
-                      <li className="text-secondary/60 dark:text-accent/60 text-tagline-1 border-b-stroke-4 dark:border-stroke-8 border-b py-4 pr-6 font-normal">
-                        Pages included
-                      </li>
-                      <li className="text-secondary/60 dark:text-accent/60 text-tagline-1 border-b-stroke-4 dark:border-stroke-8 border-b py-4 pr-6 font-normal">
-                        Custom design
-                      </li>
-                      <li className="text-secondary/60 dark:text-accent/60 text-tagline-1 border-b-stroke-4 dark:border-stroke-8 border-b py-4 pr-6 font-normal">
-                        SEO optimization
-                      </li>
-                      <li className="text-secondary/60 dark:text-accent/60 text-tagline-1 border-b-stroke-4 dark:border-stroke-8 border-b py-4 pr-6 font-normal">
-                        Branding support
-                      </li>
-                      <li className="text-secondary/60 dark:text-accent/60 text-tagline-1 py-4 pr-6 font-normal">
-                        Social media integration
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+    <section className="relative pt-[100px] pb-20 md:pt-[160px] md:pb-[100px] lg:pb-[150px] xl:pb-[200px]">
+      <div className="main-container flex flex-col gap-[70px]">
+        <div className="flex flex-col items-center text-center">
+          <RevealAnimation delay={0.2}>
+            <span className="badge badge-yellow-v2 mb-5"> Our Pricing </span>
+          </RevealAnimation>
+          <RevealAnimation delay={0.3}>
+            <h2 className="mx-auto mb-8 max-w-[650px]">Select the pricing plan that best suits your needs.</h2>
+          </RevealAnimation>
+          <RevealAnimation delay={0.4}>
+            <div className="relative z-0">
+              <RevealAnimation delay={1} duration={1.2} direction="up" offset={200}>
+                <span className="bg-secondary dark:bg-accent text-accent dark:text-secondary text-tagline-2 absolute -top-2.5 -right-6 z-11 inline-block w-[90px] rotate-[20deg] rounded-[36px] px-3.5 py-1.5 font-normal capitalize shadow-xs">
+                  save 40%
+                </span>
               </RevealAnimation>
+              <label className="dark:bg-background-9 relative z-[10] inline-flex cursor-pointer items-center rounded-full bg-white px-[57px] py-6">
+                <span className="text-secondary dark:text-accent mr-2.5 text-base font-normal">Monthly</span>
+                <input
+                  type="checkbox"
+                  id="priceCheck"
+                  checked={isAnnual}
+                  onChange={(e) => setIsAnnual(e.target.checked)}
+                  className="peer sr-only"
+                  aria-label="Toggle between monthly and yearly pricing"
+                />
+                <span className="bg-secondary dark:bg-accent *: dark:after:bg-background-9 after:bg-accent d relative h-[28px] w-13 rounded-[34px] after:absolute after:start-[2px] after:top-1/2 after:h-6 after:w-6 after:-translate-y-1/2 after:rounded-full after:transition-all after:content-[''] peer-checked:after:start-[2px] peer-checked:after:translate-x-full" />
+                <span className="text-secondary dark:text-accent ms-2.5 text-base font-normal">Yearly</span>
+              </label>
             </div>
-            <div className="col-span-12 md:col-span-6 xl:col-span-3">
-              <RevealAnimation delay={0.5}>
-                <div>
-                  <div className="bg-background-3 dark:bg-background-7 space-y-8 rounded-[20px] px-6 py-8">
-                    <div>
-                      <p className="text-tagline-1 mb-3 font-medium">Essential</p>
-                      <h3 className="text-heading-5 font-normal">Free</h3>
-                      <p className="">Free plan for all users</p>
+          </RevealAnimation>
+        </div>
+        <div className="relative">
+          <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {pricingPlans.map((plan, index) => {
+              return (
+                <RevealAnimation key={plan.id} delay={0.3 + index * 0.1} instant>
+                  <div
+                    className={cn(
+                      'flex-1 rounded-[20px] max-lg:w-full',
+                      plan.featured && "bg-[url('/images/ns-img-25.png')] bg-cover bg-center bg-no-repeat p-2.5",
+                    )}>
+                    <div
+                      className={cn(
+                        'rounded-[20px] p-8',
+                        plan.featured ? 'dark:bg-background-8 bg-white' : 'bg-background-3 dark:bg-background-5',
+                      )}>
+                      <h3 className="text-heading-5 mb-2 font-normal">{plan.title}</h3>
+                      <p
+                        className={cn(
+                          'mb-6 max-w-[250px]',
+                          plan.descriptionMuted && 'text-secondary/60 dark:text-accent/60',
+                        )}>
+                        {plan.description}
+                      </p>
+                      <div className="mb-7">
+                        <h4 className="text-heading-4 font-normal">
+                          $<span>{isAnnual ? plan.annualPrice : plan.monthlyPrice}</span>
+                        </h4>
+                        <p className="text-secondary dark:text-accent">{isAnnual ? 'Per Year' : 'Per Month'}</p>
+                      </div>
+                      <Link
+                        href="/contact-us"
+                        className={cn(
+                          'btn btn-md mb-8 block w-full text-center first-letter:uppercase before:content-none',
+                          plan.featured
+                            ? 'btn-secondary dark:btn-accent hover:btn-primary'
+                            : 'btn-white dark:btn-white-dark hover:btn-secondary dark:hover:btn-accent',
+                        )}>
+                        Get started
+                      </Link>
+                      <ul className="relative list-none space-y-2.5">
+                        {plan.features.map((feature, idx) => (
+                          <li key={`${plan.id}-${feature.label}-${idx}`} className="flex items-center gap-2.5">
+                            <span
+                              className={cn(
+                                'flex h-5 w-5 items-center justify-center rounded-full',
+                                feature.active
+                                  ? 'bg-secondary dark:bg-accent'
+                                  : 'border-secondary/20 dark:border-accent/20 dark:bg-background-9 border bg-white',
+                              )}>
+                              <CheckIcon className={cn(!feature.active && 'fill-secondary/60 dark:fill-accent/60')} />
+                            </span>
+                            <span
+                              className={cn(
+                                'text-tagline-1 font-normal',
+                                feature.active
+                                  ? 'text-secondary dark:text-accent'
+                                  : 'text-secondary/60 dark:text-accent/60',
+                              )}>
+                              {feature.label}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <Link
-                      href="/contact-us"
-                      className="btn btn-white hover:btn-primary dark:btn-white-dark btn-md w-full first-letter:uppercase before:content-none">
-                      Get started
-                    </Link>
                   </div>
-                  <div className="bg-background-1 dark:bg-background-6 rounded-[20px]">
-                    <ul>
-                      <li className="border-b-stroke-4 dark:border-stroke-8 h-14 border-b px-6 py-4 text-center">
-                        <p className="text-secondary/60 dark:text-accent/60 font-medium">Up to 5</p>
-                      </li>
-                      <li className="border-b-stroke-4 dark:border-stroke-8 flex h-14 items-center justify-center border-b px-6 py-4 text-center">
-                        <svg
-                          width={18}
-                          height={18}
-                          viewBox="0 0 18 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="shrink-0">
-                          <rect width={18} height={18} rx={9} fill="" className="fill-secondary dark:fill-accent" />
-                          <path
-                            d="M8.31661 12.7561L13.7491 7.42144C14.0836 7.0959 14.0836 6.5697 13.7491 6.24416C13.4145 5.91861 12.8736 5.91861 12.539 6.24416L7.7116 10.9901L5.46096 8.78807C5.12636 8.46253 4.58554 8.46253 4.25095 8.78807C3.91635 9.11362 3.91635 9.63982 4.25095 9.96536L7.1066 12.7561C7.27347 12.9184 7.49253 13 7.7116 13C7.93067 13 8.14974 12.9184 8.31661 12.7561Z"
-                            fill=""
-                            className="fill-white dark:fill-black"
-                          />
-                        </svg>
-                      </li>
-                      <li className="border-b-stroke-4 dark:border-stroke-8 flex h-14 items-center justify-center border-b px-6 py-4 text-center">
-                        <svg
-                          width={18}
-                          height={18}
-                          viewBox="0 0 18 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="shrink-0">
-                          <rect width={18} height={18} rx={9} fill="" className="fill-secondary dark:fill-accent" />
-                          <path
-                            d="M8.31661 12.7561L13.7491 7.42144C14.0836 7.0959 14.0836 6.5697 13.7491 6.24416C13.4145 5.91861 12.8736 5.91861 12.539 6.24416L7.7116 10.9901L5.46096 8.78807C5.12636 8.46253 4.58554 8.46253 4.25095 8.78807C3.91635 9.11362 3.91635 9.63982 4.25095 9.96536L7.1066 12.7561C7.27347 12.9184 7.49253 13 7.7116 13C7.93067 13 8.14974 12.9184 8.31661 12.7561Z"
-                            fill=""
-                            className="fill-white dark:fill-black"
-                          />
-                        </svg>
-                      </li>
-                      <li className="border-b-stroke-4 dark:border-stroke-8 h-14 border-b px-6 py-4 text-center" />
-                      <li className="h-14 px-6 py-4 text-center" />
-                    </ul>
-                  </div>
-                </div>
-              </RevealAnimation>
-            </div>
-            <div className="col-span-12 md:col-span-6 xl:col-span-3">
-              <RevealAnimation delay={0.6}>
-                <div>
-                  <div className="bg-secondary dark:bg-background-5 relative space-y-8 overflow-hidden rounded-[20px] px-6 py-8">
-                    <div className="absolute -top-28 -right-20 z-0 h-full w-full">
-                      <Image src={gradient4} alt="pricing bg" priority />
-                    </div>
-                    <div>
-                      <p className="text-tagline-1 text-accent/60 mb-3 font-medium">Advanced</p>
-                      <h3 className="text-heading-5 text-accent font-normal">$99</h3>
-                      <p className="text-accent/60">Plans for advanced users</p>
-                    </div>
-                    <Link
-                      href="/contact-us"
-                      className="btn btn-primary btn-md hover:btn-white dark:hover:btn-accent relative z-10 w-full first-letter:uppercase before:content-none">
-                      Get started
-                    </Link>
-                  </div>
-                  <div className="bg-background-1 dark:bg-background-6 rounded-[20px]">
-                    <ul>
-                      <li className="border-b-stroke-4 dark:border-stroke-8 h-14 border-b px-6 py-4 text-center">
-                        <p className="text-secondary/60 dark:text-accent/60 font-medium">Up to 10</p>
-                      </li>
-                      <li className="border-b-stroke-4 dark:border-stroke-8 flex h-14 items-center justify-center border-b px-6 py-4 text-center">
-                        <svg
-                          width={18}
-                          height={18}
-                          viewBox="0 0 18 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="shrink-0">
-                          <rect width={18} height={18} rx={9} fill="" className="fill-secondary dark:fill-accent" />
-                          <path
-                            d="M8.31661 12.7561L13.7491 7.42144C14.0836 7.0959 14.0836 6.5697 13.7491 6.24416C13.4145 5.91861 12.8736 5.91861 12.539 6.24416L7.7116 10.9901L5.46096 8.78807C5.12636 8.46253 4.58554 8.46253 4.25095 8.78807C3.91635 9.11362 3.91635 9.63982 4.25095 9.96536L7.1066 12.7561C7.27347 12.9184 7.49253 13 7.7116 13C7.93067 13 8.14974 12.9184 8.31661 12.7561Z"
-                            fill=""
-                            className="fill-white dark:fill-black"
-                          />
-                        </svg>
-                      </li>
-                      <li className="border-b-stroke-4 dark:border-stroke-8 flex h-14 items-center justify-center border-b px-6 py-4 text-center">
-                        <svg
-                          width={18}
-                          height={18}
-                          viewBox="0 0 18 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="shrink-0">
-                          <rect width={18} height={18} rx={9} fill="" className="fill-secondary dark:fill-accent" />
-                          <path
-                            d="M8.31661 12.7561L13.7491 7.42144C14.0836 7.0959 14.0836 6.5697 13.7491 6.24416C13.4145 5.91861 12.8736 5.91861 12.539 6.24416L7.7116 10.9901L5.46096 8.78807C5.12636 8.46253 4.58554 8.46253 4.25095 8.78807C3.91635 9.11362 3.91635 9.63982 4.25095 9.96536L7.1066 12.7561C7.27347 12.9184 7.49253 13 7.7116 13C7.93067 13 8.14974 12.9184 8.31661 12.7561Z"
-                            fill=""
-                            className="fill-white dark:fill-black"
-                          />
-                        </svg>
-                      </li>
-                      <li className="border-b-stroke-4 dark:border-stroke-8 flex h-14 items-center justify-center border-b px-6 py-4 text-center">
-                        <svg
-                          width={18}
-                          height={18}
-                          viewBox="0 0 18 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="shrink-0">
-                          <rect width={18} height={18} rx={9} fill="" className="fill-secondary dark:fill-accent" />
-                          <path
-                            d="M8.31661 12.7561L13.7491 7.42144C14.0836 7.0959 14.0836 6.5697 13.7491 6.24416C13.4145 5.91861 12.8736 5.91861 12.539 6.24416L7.7116 10.9901L5.46096 8.78807C5.12636 8.46253 4.58554 8.46253 4.25095 8.78807C3.91635 9.11362 3.91635 9.63982 4.25095 9.96536L7.1066 12.7561C7.27347 12.9184 7.49253 13 7.7116 13C7.93067 13 8.14974 12.9184 8.31661 12.7561Z"
-                            fill=""
-                            className="fill-white dark:fill-black"
-                          />
-                        </svg>
-                      </li>
-                      <li className="h-14 px-6 py-4 text-center" />
-                    </ul>
-                  </div>
-                </div>
-              </RevealAnimation>
-            </div>
-            <div className="col-span-12 md:col-span-6 xl:col-span-3">
-              <RevealAnimation delay={0.7}>
-                <div>
-                  <div className="bg-background-3 dark:bg-background-7 space-y-8 rounded-[20px] px-6 py-8">
-                    <div>
-                      <p className="text-tagline-1 mb-3 font-medium">Enterprise</p>
-                      <h3 className="text-heading-5 font-normal">Enterprise</h3>
-                      <p className="">Contact us for enterprise users</p>
-                    </div>
-                    <Link
-                      href="/contact-us"
-                      className="btn btn-white dark:btn-white-dark hover:btn-primary btn-md w-full first-letter:uppercase before:content-none">
-                      Get started
-                    </Link>
-                  </div>
-                  <div className="bg-background-1 dark:bg-background-6 rounded-[20px]">
-                    <ul>
-                      <li className="border-b-stroke-4 dark:border-stroke-8 h-14 border-b px-6 py-4 text-center">
-                        <p className="text-secondary/60 dark:text-accent/60 font-medium">Unlimited</p>
-                      </li>
-                      <li className="border-b-stroke-4 dark:border-stroke-8 flex h-14 items-center justify-center border-b px-6 py-4 text-center">
-                        <svg
-                          width={18}
-                          height={18}
-                          viewBox="0 0 18 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="shrink-0">
-                          <rect width={18} height={18} rx={9} fill="" className="fill-secondary dark:fill-accent" />
-                          <path
-                            d="M8.31661 12.7561L13.7491 7.42144C14.0836 7.0959 14.0836 6.5697 13.7491 6.24416C13.4145 5.91861 12.8736 5.91861 12.539 6.24416L7.7116 10.9901L5.46096 8.78807C5.12636 8.46253 4.58554 8.46253 4.25095 8.78807C3.91635 9.11362 3.91635 9.63982 4.25095 9.96536L7.1066 12.7561C7.27347 12.9184 7.49253 13 7.7116 13C7.93067 13 8.14974 12.9184 8.31661 12.7561Z"
-                            fill=""
-                            className="fill-white dark:fill-black"
-                          />
-                        </svg>
-                      </li>
-                      <li className="border-b-stroke-4 dark:border-stroke-8 flex h-14 items-center justify-center border-b px-6 py-4 text-center">
-                        <svg
-                          width={18}
-                          height={18}
-                          viewBox="0 0 18 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="shrink-0">
-                          <rect width={18} height={18} rx={9} fill="" className="fill-secondary dark:fill-accent" />
-                          <path
-                            d="M8.31661 12.7561L13.7491 7.42144C14.0836 7.0959 14.0836 6.5697 13.7491 6.24416C13.4145 5.91861 12.8736 5.91861 12.539 6.24416L7.7116 10.9901L5.46096 8.78807C5.12636 8.46253 4.58554 8.46253 4.25095 8.78807C3.91635 9.11362 3.91635 9.63982 4.25095 9.96536L7.1066 12.7561C7.27347 12.9184 7.49253 13 7.7116 13C7.93067 13 8.14974 12.9184 8.31661 12.7561Z"
-                            fill=""
-                            className="fill-white dark:fill-black"
-                          />
-                        </svg>
-                      </li>
-                      <li className="border-b-stroke-4 dark:border-stroke-8 flex h-14 items-center justify-center border-b px-6 py-4 text-center">
-                        <svg
-                          width={18}
-                          height={18}
-                          viewBox="0 0 18 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="shrink-0">
-                          <rect width={18} height={18} rx={9} fill="" className="fill-secondary dark:fill-accent" />
-                          <path
-                            d="M8.31661 12.7561L13.7491 7.42144C14.0836 7.0959 14.0836 6.5697 13.7491 6.24416C13.4145 5.91861 12.8736 5.91861 12.539 6.24416L7.7116 10.9901L5.46096 8.78807C5.12636 8.46253 4.58554 8.46253 4.25095 8.78807C3.91635 9.11362 3.91635 9.63982 4.25095 9.96536L7.1066 12.7561C7.27347 12.9184 7.49253 13 7.7116 13C7.93067 13 8.14974 12.9184 8.31661 12.7561Z"
-                            fill=""
-                            className="fill-white dark:fill-black"
-                          />
-                        </svg>
-                      </li>
-                      <li className="flex h-14 items-center justify-center px-6 py-4 text-center">
-                        <svg
-                          width={18}
-                          height={18}
-                          viewBox="0 0 18 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="shrink-0">
-                          <rect width={18} height={18} rx={9} fill="" className="fill-secondary dark:fill-accent" />
-                          <path
-                            d="M8.31661 12.7561L13.7491 7.42144C14.0836 7.0959 14.0836 6.5697 13.7491 6.24416C13.4145 5.91861 12.8736 5.91861 12.539 6.24416L7.7116 10.9901L5.46096 8.78807C5.12636 8.46253 4.58554 8.46253 4.25095 8.78807C3.91635 9.11362 3.91635 9.63982 4.25095 9.96536L7.1066 12.7561C7.27347 12.9184 7.49253 13 7.7116 13C7.93067 13 8.14974 12.9184 8.31661 12.7561Z"
-                            fill=""
-                            className="fill-white dark:fill-black"
-                          />
-                        </svg>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </RevealAnimation>
-            </div>
+                </RevealAnimation>
+              );
+            })}
           </div>
         </div>
-      </RevealAnimation>
+      </div>
     </section>
   );
 };

@@ -4,11 +4,17 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
+import Image from 'next/image';
 import RevealAnimation from '../animation/RevealAnimation';
+import secureImg from '@public/images/icons/secure.svg';
+import metImg from '@public/images/icons/met.svg';
+import readyImg from '@public/images/icons/ready.svg';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
+
+
 
 const timelineSteps = [
   {
@@ -17,7 +23,7 @@ const timelineSteps = [
     title: 'Integration Setup',
     description:
       'We connect to your existing systems—including cameras, sensors, and internal tools—so data begins flowing without replacing your infrastructure.',
-    markerVariant: 'circle-blue' as const,
+    markerVariant: 'circle-blue-first' as const,
   },
   {
     id: 2,
@@ -54,11 +60,20 @@ const timelineSteps = [
 ];
 
 const TimelineMarker = ({ variant }: { variant: (typeof timelineSteps)[0]['markerVariant'] }) => {
+  if (variant === 'circle-blue-first') {
+    return (
+      <div className="relative flex items-center justify-center">
+        <span className="relative flex h-[22px] w-[22px] items-center justify-center rounded-full bg-[#007bFF] shadow-[0_0_15px_rgba(0,123,255,0.5)]">
+          <span className="h-[6px] w-[6px] rounded-full bg-white" />
+        </span>
+      </div>
+    );
+  }
+
   if (variant === 'diamond-orange') {
     return (
       <div className="relative flex items-center justify-center">
-        <span className="absolute h-8 w-8 rotate-45 rounded-sm border border-orange-400/30 bg-orange-500/10" />
-        <span className="relative h-4 w-4 rotate-45 bg-orange-400 shadow-[0_0_12px_rgba(251,146,60,0.7)]" />
+        <span className="relative h-[18px] w-[18px] rotate-45 rounded-sm bg-[#e2501a] shadow-[0_0_12px_rgba(226,80,26,0.6)]" />
       </div>
     );
   }
@@ -67,13 +82,13 @@ const TimelineMarker = ({ variant }: { variant: (typeof timelineSteps)[0]['marke
   return (
     <div className="relative flex items-center justify-center">
       <span
-        className={`absolute h-7 w-7 rounded-full border ${isOrange ? 'border-orange-400/30 bg-orange-500/10' : 'border-blue-400/30 bg-blue-500/10'
+        className={`absolute h-8 w-8 rounded-full border ${isOrange ? 'border-[#e2501a]/30 bg-[#e2501a]/15' : 'border-[#007bFF]/30 bg-[#007bFF]/15'
           }`}
       />
       <span
-        className={`relative h-3.5 w-3.5 rounded-full ${isOrange
-          ? 'bg-orange-400 shadow-[0_0_10px_rgba(251,146,60,0.7)]'
-          : 'bg-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.7)]'
+        className={`relative h-[10px] w-[10px] rounded-full ${isOrange
+          ? 'bg-[#e2501a] shadow-[0_0_10px_rgba(226,80,26,0.6)]'
+          : 'bg-[#007bFF] shadow-[0_0_10px_rgba(0,123,255,0.6)]'
           }`}
       />
     </div>
@@ -205,12 +220,12 @@ const DeploymentTimeline = () => {
             {/* Track + markers row */}
             <div className="relative flex items-center">
               {/* Dim background track */}
-              <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-white/10" />
+              <div className="absolute left-[10%] top-1/2 h-[2px] w-[80%] -translate-y-1/2 bg-white/10" />
 
               {/* Animated progress track */}
               <div
                 ref={trackRef}
-                className="absolute left-0 top-1/2 h-px w-[80%] -translate-y-1/2 bg-gradient-to-r from-blue-400 via-blue-400 to-orange-400"
+                className="absolute left-[10%] top-1/2 h-[2px] w-[80%] -translate-y-1/2 bg-gradient-to-r from-[#007bFF] via-[#007bFF] to-[#e2501a]"
               />
 
               {/* Markers */}
@@ -255,7 +270,7 @@ const DeploymentTimeline = () => {
                 <div className="flex flex-col items-center">
                   <TimelineMarker variant={step.markerVariant} />
                   {idx < timelineSteps.length - 1 && (
-                    <div className="mt-1 w-px flex-1 bg-white/10" style={{ minHeight: '44px' }} />
+                    <div className="mt-1 w-[2px] flex-1 bg-white/10" style={{ minHeight: '44px' }} />
                   )}
                 </div>
                 <div className="pb-8">
@@ -269,6 +284,37 @@ const DeploymentTimeline = () => {
             </RevealAnimation>
           ))}
         </div>
+
+        <RevealAnimation delay={0.4}>
+          <div className='flex flex-col mt-16 bg-white rounded-2xl'>
+            <div className='flex text-center justify-center mt-10'>
+              <h3 className='text-primary-700 fw-700'>Certified. Compliant. Secure.</h3>
+            </div>
+            <div className="flex flex-col max-md:gap-y-10 max-lg:gap-x-3 md:flex-row justify-around px-3 lg:px-[60px] py-14">
+              <div className="space-y-2 text-center">
+                <figure className='flex items-center justify-center'>
+                  <Image src={metImg} alt="secure" width={64} height={64} />
+                </figure>
+                <h5 className="fw-700 flex items-center justify-center"> OSHA Compliant </h5>
+                <p className="text-black/60">Safety Standards Met</p>
+              </div>
+              <div className="space-y-2 text-center">
+                <figure className='flex items-center justify-center'>
+                  <Image src={readyImg} alt="secure" width={64} height={64} />
+                </figure>
+                <h5 className="fw-700 flex items-center justify-center"> ISO 45001 Ready </h5>
+                <p className="text-black/60">Occupational Health & Safety</p>
+              </div>
+              <div className="space-y-2 text-center">
+                <figure className='flex items-center justify-center'>
+                  <Image src={secureImg} alt="secure" width={64} height={64} />
+                </figure>
+                <h5 className="fw-700 flex items-center justify-center"> GDPR/Privacy Secure </h5>
+                <p className="text-black/60">Data Protection Certified</p>
+              </div>
+            </div>
+          </div>
+        </RevealAnimation>
       </div>
     </section>
   );

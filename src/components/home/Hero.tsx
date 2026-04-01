@@ -6,23 +6,32 @@ import HeroPerspective from './HeroPerspective';
 
 const Hero = () => {
   return (
-    <section className="bg-[url('/images/ns-img-55.svg')] bg-top bg-no-repeat pt-[160px] lg:pt-[180px] xl:pt-[228px] dark:bg-[url('/images/ns-img-dark-34.svg')]">
-      <div className="main-container">
+    <section className="relative overflow-hidden bg-white dark:bg-background-5 pt-[160px] lg:pt-[180px] xl:pt-[228px]">
+      {/* Background glowing effects to match prototype */}
+      <div className="absolute top-0 left-0 w-[50%] h-full bg-gradient-to-r from-[#eaf4ff] to-transparent pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[50%] h-full bg-gradient-to-l from-[#eaf4ff] to-transparent pointer-events-none" />
+      <div className="absolute top-[10%] -left-[15%] w-[60%] h-[80%] rounded-[100%] bg-[#cae5ff] opacity-60 blur-[100px] pointer-events-none" />
+      <div className="absolute top-[10%] -right-[15%] w-[60%] h-[80%] rounded-[100%] bg-[#cae5ff] opacity-60 blur-[100px] pointer-events-none" />
+
+      <div className="relative z-10 main-container">
         <div className="space-y-[40px] md:space-y-[50px] lg:space-y-[60px] xl:space-y-[70px]">
           <div className="flex flex-col items-center">
             <RevealAnimation delay={0.1}>
-              <span className="badge badge-white mb-3 md:mb-4 lg:mb-5">
-                <span className="badge badge-primary ">Securit</span>
-                <span className="badge badge-white">Smart Safety for Every Worker</span>
-              </span>
+              <div className="mb-3 md:mb-4 lg:mb-5 flex items-center gap-2 rounded-full bg-white py-[6px] pl-[6px] pr-5 shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-black/5">
+                <span className="rounded-full bg-[#007bFF] px-3 py-1 text-[13px] font-medium text-white shadow-sm">Securit</span>
+                <span className="text-[14px] font-medium text-black/70">Smart Safety for Every Worker</span>
+              </div>
             </RevealAnimation>
             <div className="space-y-3 md:mx-10 md:space-y-4 lg:mx-0">
               <RevealAnimation delay={0.2}>
-                <h1 className="max-w-[1200px] text-center text-primary-700 fw-700">You can’t fix what you can’t see. <br /> So we made safety impossible to miss. </h1>
+                <h1 className="max-w-[1000px] text-center text-primary-700 fw-700 tracking-tight leading-[1.1] md:text-5xl lg:text-[64px]">
+                  You can’t fix what you can’t see. <br /> So we made safety impossible to miss.
+                </h1>
               </RevealAnimation>
               <RevealAnimation delay={0.3}>
-                <p className="text-center text-black/80">
-                  Real-time location intelligence and AI-powered insights to protect your workforce, reduce incidents, and transform reactive safety into proactive prevention.
+                <p className="mx-auto max-w-[800px] text-center text-[18px] text-[#202020] font-medium leading-[1.6]">
+                  Real-time location intelligence and AI-powered insights to protect your workforce, reduce incidents,
+                  and transform reactive safety into proactive prevention.
                 </p>
               </RevealAnimation>
             </div>
@@ -31,7 +40,8 @@ const Hero = () => {
                 <li className="w-full">
                   <LinkButton
                     href="/demo"
-                    className="btn btn-primary hover:btn-secondary btn-w btn-xl dark:hover:btn-white w-[90%] sm:w-auto">
+                    insideSpan={false}
+                    className="btn rounded-full bg-[#0070CE] text-white hover:bg-[#005bb5] px-8 py-4 font-semibold w-[90%] sm:w-auto shadow-sm">
                     Get your Demo
                   </LinkButton>
                 </li>
@@ -40,7 +50,11 @@ const Hero = () => {
                 <li className="w-full">
                   <LinkButton
                     href="/video"
-                    className="btn btn-white hover:btn-primary btn-xl dark:btn-transparent w-[90%] sm:w-auto">
+                    insideSpan={false}
+                    className="btn rounded-full bg-white text-[#4b5563] hover:text-black border border-transparent shadow-[0_4px_20px_rgba(0,0,0,0.05)] px-8 py-4 font-semibold w-[90%] sm:w-auto flex flex-row items-center justify-center gap-2">
+                    <svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.5 6.13397C12.1667 6.51887 12.1667 7.48113 11.5 7.86603L1.75 13.4952C1.08333 13.8801 0.25 13.399 0.25 12.6292L0.25 1.37083C0.25 0.601034 1.08333 0.119908 1.75 0.504808L11.5 6.13397Z" />
+                    </svg>
                     Watch A Video
                   </LinkButton>
                 </li>
