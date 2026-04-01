@@ -83,6 +83,14 @@ export interface IApproach {
   slug: string;
 }
 
+export interface IIntelligence {
+  id: number;
+  title: string;
+  icon: string;
+  description: string;
+  slug: string;
+}
+
 export interface ISocialLinks {
   behance?: string;
   dribbble?: string;
@@ -180,4 +188,17 @@ export interface IWhitePaper {
   paperLink: string;
   slug: string;
   content: string;
+}
+
+export interface IMobileMenuItem {
+  id: string;
+  label: string;
+  href: string;
+}
+
+export interface IMobileMenuGroup {
+  id: string;
+  title: string;
+  submenu: IMobileMenuItem[];
+  href?: string;
 }

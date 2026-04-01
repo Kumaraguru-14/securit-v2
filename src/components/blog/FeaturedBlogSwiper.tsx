@@ -2,6 +2,7 @@
 import { IBlogPost } from '@/interface';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay, Pagination } from 'swiper/modules';
@@ -13,6 +14,20 @@ interface FeaturedBlogSwiperProps {
 }
 
 const FeaturedBlogSwiper = ({ featuredBlogs }: FeaturedBlogSwiperProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return (
+      <div className="relative">
+        <div className="bg-background-2 h-[400px] w-full animate-pulse rounded-[20px]"></div>
+      </div>
+    );
+  }
+
   return (
     <RevealAnimation delay={0.3}>
       <div className="relative">

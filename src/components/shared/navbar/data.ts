@@ -1,21 +1,16 @@
-import { FooterOneData } from '@/interface';
-import { MobileMenuItem } from '../mobile-menu/MobileMenu';
+import { FooterOneData, IMobileMenuGroup } from '@/interface';
 
-export interface MobileMenuGroup {
-  id: string;
-  title: string;
-  submenu: MobileMenuItem[];
-}
-
-export const mobileMenuData: MobileMenuGroup[] = [
+export const mobileMenuData: IMobileMenuGroup[] = [
   {
     id: 'home',
     title: 'Home',
     submenu: [],
+    href: '/',
   },
   {
     id: 'resources',
     title: 'Resources',
+    href: undefined,
     submenu: [
       { id: 'blog', label: 'Blog', href: './blog' },
       { id: 'tutorial', label: 'Tutorial', href: './tutorial' },
@@ -27,16 +22,19 @@ export const mobileMenuData: MobileMenuGroup[] = [
     id: 'company',
     title: 'Company',
     submenu: [],
+    href: '/company',
   },
   {
     id: 'pricing',
     title: 'Pricing',
     submenu: [],
+    href: '/pricing',
   },
   {
     id: 'contact-us',
     title: 'Contact Us',
     submenu: [],
+    href: '/contact-us',
   },
 ];
 
