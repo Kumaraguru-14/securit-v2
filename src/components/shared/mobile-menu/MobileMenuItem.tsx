@@ -2,17 +2,19 @@
 
 import { useMobileMenuContext } from '@/context/MobileMenuContext';
 import { cn } from '@/utils/cn';
+import Link from 'next/link';
 import { ReactNode } from 'react';
 
 interface MobileMenuItemProps {
   id: string;
   title: string;
+  href?: string;
   children?: ReactNode;
   hasSubmenu?: boolean;
 }
 
-const MobileMenuItem = ({ id, title, children, hasSubmenu = false }: MobileMenuItemProps) => {
-  const { activeSubmenu, toggleSubmenu } = useMobileMenuContext();
+const MobileMenuItem = ({ id, title, href, children, hasSubmenu = false }: MobileMenuItemProps) => {
+  const { activeSubmenu, toggleSubmenu, closeMenu } = useMobileMenuContext();
 
   const isActive = activeSubmenu === id;
 
@@ -22,32 +24,49 @@ const MobileMenuItem = ({ id, title, children, hasSubmenu = false }: MobileMenuI
     }
   };
 
-  return (
-    <li className="space-y-2">
-      <button
-        onClick={handleToggle}
-        className={cn('flex w-full cursor-pointer items-center justify-between p-2.5 transition-all duration-200')}
-        aria-expanded={hasSubmenu ? isActive : undefined}
-        aria-controls={hasSubmenu ? `submenu-${id}` : undefined}>
+  const itemClassName = cn(
+    'flex w-full cursor-pointer items-center justify-between p-2.5 transition-all duration-200 text-left',
+  );
+
+  const textClassName = cn(
+    'text-tagline-1 ease block font-normal transition-colors duration-300',
+    isActive ? 'text-secondary dark:text-accent font-medium' : 'text-secondary/60 dark:text-accent/60',
+  );
+
+  const content = (
+    <>
+      <span className={textClassName}>{title} </span>
+      {hasSubmenu && (
         <span
           className={cn(
-            'text-tagline-1 ease block font-normal transition-colors duration-300',
-            isActive ? 'text-secondary dark:text-accent font-medium' : 'text-secondary/60 dark:text-accent/60',
+            'stroke-secondary/60 dark:stroke-accent/60 size-5 transition-transform duration-300 ease-in-out',
+            isActive && 'rotate-90',
           )}>
-          {title}{' '}
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none">
+            <path d="M8 12L12 8L8 4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </span>
-        {hasSubmenu && (
-          <span
-            className={cn(
-              'stroke-secondary/60 dark:stroke-accent/60 size-5 transition-transform duration-300 ease-in-out',
-              isActive && 'rotate-90',
-            )}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none">
-              <path d="M8 12L12 8L8 4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </span>
-        )}
-      </button>
+      )}
+    </>
+  );
+
+  return (
+    <li className="space-y-2">
+      {hasSubmenu ? (
+        <button
+          onClick={handleToggle}
+          className={itemClassName}
+          aria-expanded={isActive}
+          aria-controls={`submenu-${id}`}>
+          {content}
+        </button>
+      ) : href ? (
+        <Link href={href} onClick={() => closeMenu()} className={itemClassName}>
+          {content}
+        </Link>
+      ) : (
+        <div className={itemClassName}>{content}</div>
+      )}
 
       {/* show submenu parent  */}
       {hasSubmenu && children && (

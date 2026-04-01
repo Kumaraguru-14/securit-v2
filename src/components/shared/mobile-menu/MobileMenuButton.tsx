@@ -6,7 +6,7 @@ const MobileMenuButton = () => {
   const { openMenu } = useMobileMenuContext();
 
   return (
-    <div className="block xl:hidden">
+    <div className="block lg:hidden">
       <button
         onClick={openMenu}
         className="bg-background-4 dark:bg-background-6 flex size-12 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-full transition-all duration-200 hover:scale-105"

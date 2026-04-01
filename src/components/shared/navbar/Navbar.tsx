@@ -5,8 +5,6 @@ import RevealAnimation from '@/components/animation/RevealAnimation';
 import { MobileMenuProvider } from '@/context/MobileMenuContext';
 import { useNavbarScroll } from '@/hooks/useScrollHeader';
 import { cn } from '@/utils/cn';
-import logoDark from '@public/images/shared/logo-dark.svg';
-import logoIcon from '@public/images/shared/logo.svg';
 import mainLogo from '@public/images/shared/main-logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -40,21 +38,17 @@ const Navbar = () => {
         <RevealAnimation direction="up" offset={100} delay={0.1} instant>
           <div
             className={cn(
-              'border-stroke-2 dark:border-stroke-6 bg-accent dark:bg-background-9 mx-auto flex items-center justify-around border-b-2 px-2.5 py-2.5 xl:py-0',
+              'border-stroke-2 dark:border-stroke-6 bg-accent dark:bg-background-9 mx-auto flex items-center justify-around max-lg:justify-between border-b-2 px-2.5 py-2.5 xl:py-0',
             )}>
             <div className="flex items-center justify-center">
               <Link href="/" className="inline-flex items-center">
                 <span className="sr-only">Home</span>
-                <figure className="hidden lg:block lg:max-w-[198px]">
-                  <Image src={mainLogo} alt="NextSaaS" className="h-auto w-full dark:invert" priority />
-                </figure>
-                <figure className="block max-w-[44px] lg:hidden">
-                  <Image src={logoIcon} alt="NextSaaS" className="block h-auto w-full dark:hidden" priority />
-                  <Image src={logoDark} alt="NextSaaS" className="hidden h-auto w-full dark:block" priority />
+                <figure className="lg:max-w-[198px]">
+                  <Image src={mainLogo} alt="Securit" className="h-auto w-full dark:invert" priority />
                 </figure>
               </Link>
             </div>
-            <nav className="hidden items-center xl:flex">
+            <nav className="hidden items-center lg:flex">
               <ul className="flex items-center">
                 <li className="relative cursor-pointer py-2.5">
                   <Link
@@ -111,7 +105,7 @@ const Navbar = () => {
                 </li>
               </ul>
             </nav>
-            <div className="hidden items-center justify-center xl:flex">
+            <div className="hidden items-center justify-center lg:flex">
               <Link href="/demo" className="btn btn-md btn-primary hover:btn-white-dark dark:hover:btn-white mr-6 font-bold">
                 <span>Get Demo</span>
               </Link>

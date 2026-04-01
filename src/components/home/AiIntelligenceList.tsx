@@ -2,7 +2,6 @@
 
 import { IIntelligence } from '@/interface';
 import RevealAnimation from '../animation/RevealAnimation';
-import LinkButton from '../ui/button/LinkButton';
 
 interface AiIntelligenceListProps {
     intelligenceData: IIntelligence[];
@@ -28,13 +27,6 @@ const AiIntelligenceList = ({ intelligenceData }: AiIntelligenceListProps) => {
                                     <div className="space-y-2">
                                         <h3 className="text-heading-5 line-clamp-1">{intelligence.title}</h3>
                                         <p className="mx-auto line-clamp-3 max-w-[361px]">{intelligence.description}</p>
-                                    </div>
-                                    <div>
-                                        <LinkButton
-                                            href={`/services/${intelligence.slug}`}
-                                            className="btn btn-white dark:btn-transparent dark:hover:btn-accent hover:btn-secondary btn-md">
-                                            Read more
-                                        </LinkButton>
                                     </div>
                                 </div>
                             </div>

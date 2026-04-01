@@ -1,4 +1,6 @@
 'use client';
+
+import { IMobileMenuGroup } from '@/interface';
 import { useMobileMenuContext } from '@/context/MobileMenuContext';
 import { cn } from '@/utils/cn';
 import logoDark from '@public/images/shared/logo-dark.svg';
@@ -8,19 +10,8 @@ import Link from 'next/link';
 import MenuCloseButton from './MenuCloseButton';
 import MobileMenuItem from './MobileMenuItem';
 
-export interface MobileMenuItem {
-  id: string;
-  label: string;
-  href: string;
-}
 
-export interface MobileMenuGroup {
-  id: string;
-  title: string;
-  submenu: MobileMenuItem[];
-}
-
-const MobileMenu = ({ menuData }: { menuData: MobileMenuGroup[] }) => {
+const MobileMenu = ({ menuData }: { menuData: IMobileMenuGroup[] }) => {
   const { isOpen } = useMobileMenuContext();
   return (
     <aside
@@ -48,7 +39,12 @@ const MobileMenu = ({ menuData }: { menuData: MobileMenuGroup[] }) => {
           </p>
           <ul className="space-y-2">
             {menuData.map((item) => (
-              <MobileMenuItem key={item.id} id={item.id} title={item.title} hasSubmenu={item.submenu.length > 0}>
+              <MobileMenuItem
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                href={item.href}
+                hasSubmenu={item.submenu.length > 0}>
                 {/* submenu items list  */}
                 <ul>
                   {item?.submenu?.map((subItem) => (

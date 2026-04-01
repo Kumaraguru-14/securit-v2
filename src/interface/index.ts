@@ -189,3 +189,16 @@ export interface IWhitePaper {
   slug: string;
   content: string;
 }
+
+export interface IMobileMenuItem {
+  id: string;
+  label: string;
+  href: string;
+}
+
+export interface IMobileMenuGroup {
+  id: string;
+  title: string;
+  submenu: IMobileMenuItem[];
+  href?: string;
+}
